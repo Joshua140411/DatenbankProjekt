@@ -3,6 +3,8 @@ package Backend;
 import Daos.IRuestungDao;
 import Dtos.RuestungDto;
 
+import java.util.List;
+
 public class RuestungService {
 
     private IRuestungDao iRuestungDao;
@@ -13,5 +15,9 @@ public class RuestungService {
 
    public void addRuestung(RuestungDto ruestungDto) {
         iRuestungDao.create(ruestungDto);
+   }
+
+   public List<RuestungDto> getAllRuestung() {
+        return iRuestungDao.readAll();
    }
 }
