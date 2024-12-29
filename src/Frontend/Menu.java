@@ -15,45 +15,60 @@ public class Menu {
     public void createMenu() {
         System.out.println("DAS IST DAS MENU");
         System.out.println("-----------------------------------");
-        System.out.println("1 - CREATE");
-        System.out.println("2 - READ");
-        System.out.println("3 - UPDATE");
-        System.out.println("4 - DELETE");
-        System.out.println("5 - EXIT");
-        System.out.println("6 - Test");
+        System.out.println("1 - SQL ABFRAGE 1");
+        System.out.println("2 - SQL ABFRAGE 2");
+        System.out.println("3 - SQL ABFRAGE 3");
+        System.out.println("4 - SQL ABFRAGE 4");
+        System.out.println("5 - SQL ABFRAGE 5");
+        System.out.println("6 - EXIT");
 
-        manageInput();
+        manageInput(doInput());
     }
 
-    public void manageInput() {
+    public int doInput() {
         Scanner sc = new Scanner(System.in);
         System.out.println("");
         System.out.println("Bitte eine Zahl von 1-6 eingeben: ");
-        int eingabe = sc.nextInt();
-        switch (eingabe) {
-            case 1:
-                //TODO
-                break;
+        return sc.nextInt();
+    }
 
-            case 2:
-                //TODO
-                break;
+    public void manageInput(int eingabe) {
 
-            case 3:
-                //TODO
-                break;
+        while(eingabe > 0 && eingabe < 6) {
+            switch (eingabe) {
+                case 1:
+                    System.out.println("SQL ABFRAGE 1");
+                    System.out.println("");
+                    createMenu();
+                    break;
 
-            case 4:
-                //TODO
-                break;
+                case 2:
+                    System.out.println("SQL ABFRAGE 2");
+                    System.out.println("");
+                    createMenu();
+                    break;
 
-            case 5:
-                System.exit(0);
-                break;
+                case 3:
+                    System.out.println("SQL ABFRAGE 3");
+                    System.out.println("");
+                    createMenu();
+                    break;
 
-            case 6:
-                ruestungService.getAllRuestung().forEach(System.out::println);
-                break;
+                case 4:
+                    System.out.println("SQL ABFRAGE 4");
+                    System.out.println("");
+                    createMenu();
+                    break;
+
+                case 5:
+                    System.out.println("SQL ABFRAGE 5");
+                    System.out.println("");
+                    createMenu();
+                    break;
+            }
+        }
+        if(eingabe == 6) {
+            System.exit(0);
         }
     }
 }
