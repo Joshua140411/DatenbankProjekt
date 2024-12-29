@@ -1,7 +1,7 @@
 package Utils;
 
 public class ConnectionValues {
-    public static String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    public static String USER = "C##FBPOOL1";
-    public static String PASSWORD = "oracle";
+    public static String URL = "jdbc:mysql://@127.0.0.1:3306/horde";
+    public static String USER = "root";
+    public static String PASSWORD = "Dorado.2205";
 }

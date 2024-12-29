@@ -61,8 +61,7 @@ public class Menu {
                     break;
 
                 case 5:
-                    System.out.println("SQL ABFRAGE 5");
-                    System.out.println("");
+                   ruestungService.getAllRuestung().forEach(value->System.out.println(value.getRuestungsId()));
                     createMenu();
                     break;
             }

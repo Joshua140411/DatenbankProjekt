@@ -39,12 +39,13 @@ public class RuestungDao implements IRuestungDao{
             ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 RuestungDto dto = new RuestungDto();
-                dto.setRuestungsId(resultSet.getInt("mock"));;
-                dto.setAusruestungsTyp(resultSet.getString("mock"));
-                dto.setRuestungsTypId(resultSet.getInt("mock"));
-                dto.setItemLevel(resultSet.getInt("mock"));
-                dto.setMindestLevel(resultSet.getInt("mock"));
-                dto.setRuestungsPunkte(resultSet.getInt("mock"));
+                dto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
+                dto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
+                dto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
+                dto.setItemLevel(resultSet.getInt("ItemLevel"));
+                dto.setMindestLevel(resultSet.getInt("MindestLevel"));
+                dto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
+                ruestungDtoListe.add(dto);
             }
         } catch (SQLException e) {
             System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/readAll): " + e.getMessage());
