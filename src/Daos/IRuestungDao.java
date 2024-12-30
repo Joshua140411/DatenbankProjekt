@@ -6,8 +6,8 @@ import java.util.List;
 public interface IRuestungDao {
 
     void create(RuestungDto dto);
-    RuestungDto read();
+    RuestungDto read(int position);
     List<RuestungDto> readAll();
-    void update();
-    void delete();
+    void update(int position, RuestungDto dto);
+    void delete(int position);
 }

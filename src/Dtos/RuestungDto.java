@@ -66,4 +66,9 @@ public class RuestungDto {
     public void setRuestungsPunkte(int ruestungsPunkte) {
         this.ruestungsPunkte = ruestungsPunkte;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + getRuestungsId() + ", Bezeichnung: " + getAusruestungsTyp() + ", TypID: " + getRuestungsTypId() + ", ItemLevel: " + getItemLevel() + ", MindestLevel: " + getMindestLevel() + ", RuestungsPunkte: " + getRuestungsPunkte();
+    }
 }

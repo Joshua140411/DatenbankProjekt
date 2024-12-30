@@ -1,20 +1,20 @@
 package Dtos;
 
-public class npcDto
+public class NpcDto
 {
     private int npcID;
     private String name;
     private int volk;
     private String ambitionen;
 
-    public npcDto(int npcID, String name, int volk, String ambitionen) {
+    public NpcDto(int npcID, String name, int volk, String ambitionen) {
         this.npcID = npcID;
         this.name = name;
         this.volk = volk;
         this.ambitionen = ambitionen;
     }
 
-    public npcDto() {
+    public NpcDto() {
     }
 
     public int getNpcID() {

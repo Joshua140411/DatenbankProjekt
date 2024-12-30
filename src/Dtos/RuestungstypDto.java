@@ -1,16 +1,16 @@
 package Dtos;
 
-public class ruestungstypDto
+public class RuestungstypDto
 {
     private int ruestungstypID;
     private String bezeichnung;
 
-    public ruestungstypDto(int ruestungstypID, String ruestungstypName) {
+    public RuestungstypDto(int ruestungstypID, String ruestungstypName) {
         this.ruestungstypID = ruestungstypID;
         this.bezeichnung = ruestungstypName;
     }
 
-    public ruestungstypDto() {
+    public RuestungstypDto() {
     }
 
     public int getRuestungstypID() {

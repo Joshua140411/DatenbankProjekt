@@ -1,16 +1,16 @@
 package Dtos;
 
-public class rolleDto
+public class RolleDto
 {
     private int rolleID;
     private String rollenName;
 
-    public rolleDto(int rolleID, String name) {
+    public RolleDto(int rolleID, String name) {
         this.rolleID = rolleID;
         this.rollenName = name;
     }
 
-    public rolleDto() {
+    public RolleDto() {
     }
 
     public int getRolleID() {

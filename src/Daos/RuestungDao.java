@@ -2,7 +2,6 @@ package Daos;
 
 import Dtos.RuestungDto;
 import Utils.ConnectionValues;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,32 +20,70 @@ public class RuestungDao implements IRuestungDao{
 
     @Override
     public void create(RuestungDto dto) {
-        //TODO
+        String query = "INSERT INTO ruestung VALUES (?, ?, ?, ?, ?, ?)";
+
+        try(Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement(query)) {
+
+            statement.setInt(1, dto.getRuestungsId());
+            statement.setString(2, dto.getAusruestungsTyp());
+            statement.setInt(3, dto.getRuestungsTypId());
+            statement.setInt(4, dto.getItemLevel());
+            statement.setInt(5, dto.getMindestLevel());
+            statement.setInt(6, dto.getRuestungsPunkte());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/create): " + e.getMessage());
+        }
     }
 
     @Override
-    public RuestungDto read() {
-        //TODO
-        return null;
+    public RuestungDto read(int id) {
+        RuestungDto ruestungDto = new RuestungDto();
+        String query = "SELECT * FROM RUESTUNG WHERE ID = ?";
+
+        try(Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery()) {
+
+            statement.setInt(1, id);
+
+            while(resultSet.next()) {
+                ruestungDto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
+                ruestungDto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
+                ruestungDto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
+                ruestungDto.setItemLevel(resultSet.getInt("ItemLevel"));
+                ruestungDto.setMindestLevel(resultSet.getInt("MindestLevel"));
+                ruestungDto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
+            }
+            closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/read): " + e.getMessage());
+        }
+        return ruestungDto;
     }
 
     @Override
     public List<RuestungDto> readAll() {
         List<RuestungDto> ruestungDtoListe = new ArrayList<>();
-        String sql = "SELECT * FROM ruestung";
+        String query = "SELECT * FROM ruestung";
+
         try(Connection con = getConnection();
             Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)) {
+            ResultSet resultSet = statement.executeQuery(query)) {
+
             while (resultSet.next()) {
-                RuestungDto dto = new RuestungDto();
-                dto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
-                dto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
-                dto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
-                dto.setItemLevel(resultSet.getInt("ItemLevel"));
-                dto.setMindestLevel(resultSet.getInt("MindestLevel"));
-                dto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
-                ruestungDtoListe.add(dto);
+                RuestungDto ruestungDto = new RuestungDto();
+                ruestungDto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
+                ruestungDto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
+                ruestungDto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
+                ruestungDto.setItemLevel(resultSet.getInt("ItemLevel"));
+                ruestungDto.setMindestLevel(resultSet.getInt("MindestLevel"));
+                ruestungDto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
+                ruestungDtoListe.add(ruestungDto);
             }
+            closeConnection(con);
         } catch (SQLException e) {
             System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/readAll): " + e.getMessage());
         }
@@ -54,12 +91,12 @@ public class RuestungDao implements IRuestungDao{
     }
 
     @Override
-    public void update() {
+    public void update(int position, RuestungDto ruestungDto) {
 
     }
 
     @Override
-    public void delete() {
+    public void delete(int position) {
 
     }
 }

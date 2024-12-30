@@ -17,7 +17,19 @@ public class RuestungService {
         iRuestungDao.create(ruestungDto);
    }
 
+   public RuestungDto getRuestungById(int id) {
+        return iRuestungDao.read(id);
+   }
+
    public List<RuestungDto> getAllRuestung() {
         return iRuestungDao.readAll();
+   }
+
+   public void updateRuestung(int position, RuestungDto ruestungDto) {
+        iRuestungDao.update(position, ruestungDto);
+   }
+
+   public void deleteRuestungById(int id) {
+        iRuestungDao.delete(id);
    }
 }
