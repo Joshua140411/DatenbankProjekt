@@ -2,12 +2,11 @@ package Backend;
 
 import Daos.IRuestungDao;
 import Dtos.RuestungDto;
-
 import java.util.List;
 
 public class RuestungService {
 
-    private IRuestungDao iRuestungDao;
+    private final IRuestungDao iRuestungDao;
 
     public RuestungService(IRuestungDao iRuestungDao) {
         this.iRuestungDao = iRuestungDao;
