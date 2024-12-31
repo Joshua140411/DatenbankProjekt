@@ -112,7 +112,7 @@ public class Menu {
                 System.out.println("-------------------------------");
                 System.out.print("ID: ");
                 int updateID = sc.nextInt();
-                ruestungService.updateRuestung(updateID, createDto(sc));
+                ruestungService.updateRuestung(createDto(sc));
                 System.out.println();
             case 5:
                 System.out.println();

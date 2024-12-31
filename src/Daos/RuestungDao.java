@@ -91,12 +91,37 @@ public class RuestungDao implements IRuestungDao{
     }
 
     @Override
-    public void update(int position, RuestungDto ruestungDto) {
+    public void update(RuestungDto ruestungDto) {
+        String query = "UPDATE ruestung SET ausruestungsTyp = ?, ruestungsTypId = ?, itemLevel = ?, mindestLevel = ?, ruestungsPunkte = ? WHERE ausruestungsID = ?";
 
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            statement.setString(1, ruestungDto.getAusruestungsTyp());
+            statement.setInt(2, ruestungDto.getRuestungsTypId());
+            statement.setInt(3, ruestungDto.getItemLevel());
+            statement.setInt(4, ruestungDto.getMindestLevel());
+            statement.setInt(5, ruestungDto.getRuestungsPunkte());
+            statement.setInt(6, ruestungDto.getRuestungsId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Aktualisieren der Ruestung (RuestungsDao/update): " + e.getMessage());
+        }
     }
 
     @Override
-    public void delete(int position) {
+    public void delete(int id) {
+        String query = "DELETE FROM ruestung WHERE ausruestungsId = ?";
 
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Löschen der Ruestung (RuestungsDao/delete): " + e.getMessage());
+        }
     }
 }

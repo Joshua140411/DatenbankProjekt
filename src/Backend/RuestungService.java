@@ -24,8 +24,8 @@ public class RuestungService {
         return iRuestungDao.readAll();
    }
 
-   public void updateRuestung(int position, RuestungDto ruestungDto) {
-        iRuestungDao.update(position, ruestungDto);
+   public void updateRuestung(RuestungDto ruestungDto) {
+        iRuestungDao.update(ruestungDto);
    }
 
    public void deleteRuestungById(int id) {
