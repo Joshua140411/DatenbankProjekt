@@ -41,7 +41,7 @@ public class RuestungDao implements IRuestungDao{
     @Override
     public RuestungDto read(int id) {
         RuestungDto ruestungDto = new RuestungDto();
-        String query = "SELECT * FROM RUESTUNG WHERE ID = ?";
+        String query = "SELECT * FROM RUESTUNG WHERE AusruestungsID = ?";
 
         try(Connection con = getConnection();
             PreparedStatement statement = con.prepareStatement(query);
