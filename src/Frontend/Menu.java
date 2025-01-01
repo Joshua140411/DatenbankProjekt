@@ -89,7 +89,7 @@ public class Menu {
         int eingabe = sc.nextInt();
         switch (eingabe) {
             case 1:
-                ruestungService.addRuestung(createDto(sc));
+                ruestungService.addRuestung(createDto(sc, 0));
                 break;
             case 2:
                 System.out.println();
@@ -112,7 +112,7 @@ public class Menu {
                 System.out.println("-------------------------------");
                 System.out.print("ID: ");
                 int updateID = sc.nextInt();
-                ruestungService.updateRuestung(createDto(sc));
+                ruestungService.updateRuestung(createDto(sc, updateID));
                 System.out.println();
             case 5:
                 System.out.println();
@@ -127,10 +127,15 @@ public class Menu {
         }
     }
 
-    public RuestungDto createDto(Scanner sc) {
-        System.out.println();
-        System.out.print("ID: ");
-        int id = sc.nextInt();
+    public RuestungDto createDto(Scanner sc, int id) {
+        int localId = 0;
+        if(id == 0) {
+            System.out.println();
+            System.out.print("ID: ");
+            localId = sc.nextInt();
+        } else {
+            localId = id;
+        }
         System.out.print("Bezeichnung: ");
         String bezeichnung = sc.next();
         System.out.println();
@@ -145,6 +150,6 @@ public class Menu {
         System.out.print("Ruestungspunkte: ");
         int ruestungspunkte = sc.nextInt();
         System.out.println();
-        return new RuestungDto(id, bezeichnung, typId, itemLevel, mindestlevel, ruestungspunkte);
+        return new RuestungDto(localId, bezeichnung, typId, itemLevel, mindestlevel, ruestungspunkte);
     }
 }
