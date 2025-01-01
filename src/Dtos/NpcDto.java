@@ -53,4 +53,8 @@ public class NpcDto
     public String toString() {
         return "ID: " + getNpcID() + ", Name: " + getName() + ", Volk: " + getVolk() + ", Ambitionen: " + getAmbitionen();
     }
+
+    public String allNpcByVolkIdToString() {
+        return "ID: " + getNpcID() + ", Name: " + getName() + ", Ambitionen: " + getAmbitionen();
+    }
 }

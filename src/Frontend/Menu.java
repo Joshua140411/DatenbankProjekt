@@ -3,6 +3,7 @@ package Frontend;
 import Backend.NpcService;
 import Backend.RuestungService;
 import Backend.RuestungsTypService;
+import Backend.VolkService;
 import Dtos.RuestungDto;
 import java.util.Scanner;
 
@@ -11,11 +12,14 @@ public class Menu {
     private RuestungService ruestungService;
     private RuestungsTypService ruestungsTypService;
     private NpcService npcService;
+    private VolkService volkService;
 
-    public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService, NpcService npcService) {
+    public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService,
+                NpcService npcService, VolkService volkService) {
         this.ruestungService = ruestungService;
         this.ruestungsTypService = ruestungsTypService;
         this.npcService = npcService;
+        this.volkService = volkService;
     }
 
     public void createMenu() {
@@ -45,10 +49,13 @@ public class Menu {
             case 1:
                 System.out.println("SQL ABFRAGE 1");
                 System.out.println();
+                System.out.println("Voelker: ");
+                volkService.getAllVolk().forEach(value -> System.out.println(value.toString()));
+                System.out.println();
                 System.out.println("Volk ID: ");
                 int volkId = sc2.nextInt();
                 System.out.println("--------------------------------");
-                npcService.getAllNpcByVolkId(volkId).forEach(value -> System.out.println(value.toString()));
+                npcService.getAllNpcByVolkId(volkId).forEach(value -> System.out.println(value.allNpcByVolkIdToString()));
                 createMenu();
                 break;
             case 2:

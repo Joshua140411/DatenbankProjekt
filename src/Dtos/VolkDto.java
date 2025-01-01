@@ -68,4 +68,9 @@ public class VolkDto
     public void setAnfuehrer(int anfuehrer) {
         this.anfuehrer = anfuehrer;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + getVolkID() + ", Name" + getName();
+    }
 }

@@ -2,7 +2,6 @@ package Daos;
 
 import Dtos.NpcDto;
 import Utils.ConnectionValues;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class NpcDao implements INpcDao {
     @Override
     public List<NpcDto> readNpcWithVolkId(int volkId) {
         List<NpcDto> npcDtoList = new ArrayList<>();
-        String query = "SELECT npcID, name, ambitionen FROM NPC WHERE volkId = ?";
+        String query = "SELECT npcID, name, ambitionen FROM NPC WHERE volk = ?";
 
         try (Connection con = getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(query)){
