@@ -71,6 +71,6 @@ public class VolkDto
 
     @Override
     public String toString() {
-        return "ID: " + getVolkID() + ", Name" + getName();
+        return "ID: " + getVolkID() + ", Name: " + getName();
     }
 }
