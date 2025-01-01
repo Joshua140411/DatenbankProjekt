@@ -48,4 +48,9 @@ public class NpcDto
     public void setAmbitionen(String ambitionen) {
         this.ambitionen = ambitionen;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + getNpcID() + ", Name: " + getName() + ", Volk: " + getVolk() + ", Ambitionen: " + getAmbitionen();
+    }
 }

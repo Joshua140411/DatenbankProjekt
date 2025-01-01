@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.NpcService;
 import Backend.RuestungService;
 import Backend.RuestungsTypService;
 import Dtos.RuestungDto;
@@ -9,10 +10,12 @@ public class Menu {
 
     private RuestungService ruestungService;
     private RuestungsTypService ruestungsTypService;
+    private NpcService npcService;
 
-    public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService) {
+    public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService, NpcService npcService) {
         this.ruestungService = ruestungService;
         this.ruestungsTypService = ruestungsTypService;
+        this.npcService = npcService;
     }
 
     public void createMenu() {
@@ -37,10 +40,15 @@ public class Menu {
     }
 
     public void manageInput(int eingabe) {
+        Scanner sc2 = new Scanner(System.in);
         switch (eingabe) {
             case 1:
                 System.out.println("SQL ABFRAGE 1");
                 System.out.println();
+                System.out.println("Volk ID: ");
+                int volkId = sc2.nextInt();
+                System.out.println("--------------------------------");
+                npcService.getAllNpcByVolkId(volkId).forEach(value -> System.out.println(value.toString()));
                 createMenu();
                 break;
             case 2:
