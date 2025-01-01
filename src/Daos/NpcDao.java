@@ -44,6 +44,10 @@ public class NpcDao implements INpcDao {
         } catch (SQLException e) {
             System.out.println("Fehler beim Laden des NPC (NpcDao/readNpcWithVolkId): " + e.getMessage());
         }
+        if (npcDtoList.isEmpty()) {
+            System.out.println("Dem Volk mit der ID: " + volkId + " gehoert kein NPC an!");
+            System.out.println();
+        }
         return npcDtoList;
     }
 }
