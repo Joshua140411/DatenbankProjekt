@@ -44,20 +44,23 @@ public class RuestungDao implements IRuestungDao{
         String query = "SELECT * FROM RUESTUNG WHERE AusruestungsID = ?";
 
         try(Connection con = getConnection();
-            PreparedStatement statement = con.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery()) {
+            PreparedStatement statement = con.prepareStatement(query)) {
 
             statement.setInt(1, id);
 
-            while(resultSet.next()) {
-                ruestungDto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
-                ruestungDto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
-                ruestungDto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
-                ruestungDto.setItemLevel(resultSet.getInt("ItemLevel"));
-                ruestungDto.setMindestLevel(resultSet.getInt("MindestLevel"));
-                ruestungDto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while(resultSet.next()) {
+                    ruestungDto.setRuestungsId(resultSet.getInt("AusruestungsID"));;
+                    ruestungDto.setAusruestungsTyp(resultSet.getString("Ausruestungstyp"));
+                    ruestungDto.setRuestungsTypId(resultSet.getInt("RuestungstypID"));
+                    ruestungDto.setItemLevel(resultSet.getInt("ItemLevel"));
+                    ruestungDto.setMindestLevel(resultSet.getInt("MindestLevel"));
+                    ruestungDto.setRuestungsPunkte(resultSet.getInt("RuestungsPunkte"));
+                }
+                closeConnection(con);
+            } catch (SQLException e) {
+                System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/read): " + e.getMessage());
             }
-            closeConnection(con);
         } catch (SQLException e) {
             System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/read): " + e.getMessage());
         }
