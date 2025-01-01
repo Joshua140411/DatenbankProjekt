@@ -56,6 +56,7 @@ public class Menu {
                 int volkId = sc2.nextInt();
                 System.out.println("--------------------------------");
                 npcService.getAllNpcByVolkId(volkId).forEach(value -> System.out.println(value.allNpcByVolkIdToString()));
+                System.out.println();
                 createMenu();
                 break;
             case 2:
@@ -105,6 +106,7 @@ public class Menu {
         switch (eingabe) {
             case 1:
                 ruestungService.addRuestung(createDto(sc, 0));
+                System.out.println();
                 break;
             case 2:
                 System.out.println();
