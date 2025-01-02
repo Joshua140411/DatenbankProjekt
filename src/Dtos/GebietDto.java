@@ -70,6 +70,6 @@ public class GebietDto
     }
 
     public String gebietIdBezeichnungToString() {
-        return "ID: " + getGebietID() + ", Bezeichnung: " + getBezeichnung();
+        return  "Bezeichnung: " + getBezeichnung();
     }
 }

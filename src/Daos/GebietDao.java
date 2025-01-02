@@ -47,7 +47,6 @@ public class GebietDao implements IGebietDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     GebietDto gebietDto = new GebietDto();
-                    gebietDto.setGebietID(resultSet.getInt("GebietID"));
                     gebietDto.setBezeichnung(resultSet.getString("Bezeichnung"));
                     gebietDtoList.add(gebietDto);
                 }

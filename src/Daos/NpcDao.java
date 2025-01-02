@@ -21,7 +21,7 @@ public class NpcDao implements INpcDao {
     @Override
     public List<NpcDto> readNpcWithVolkId(int volkId) {
         List<NpcDto> npcDtoList = new ArrayList<>();
-        String query = "SELECT n.npcID, n.name, n.ambitionen, v.bezeichnung FROM NPC n JOIN volk v ON n.volk = v.volkID WHERE n.volk = ?";
+        String query = "SELECT n.npcID, n.name, n.ambitionen, v.name AS volkname FROM NPC n JOIN volk v ON n.volk = v.volkID WHERE n.volk = ?";
 
         try (Connection con = getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(query)){
@@ -35,7 +35,7 @@ public class NpcDao implements INpcDao {
                     npcDto.setName(resultSet.getString("Name"));
                     npcDto.setVolk(volkId);
                     npcDto.setAmbitionen(resultSet.getString("Ambitionen"));
-                    npcDto.setVolkBezeichnug(resultSet.getString("Bezeichnung"));
+                    npcDto.setVolkBezeichnug(resultSet.getString("Volkname"));
                     npcDtoList.add(npcDto);
                 }
                 closeConnection(con);

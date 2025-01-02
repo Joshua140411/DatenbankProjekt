@@ -25,7 +25,7 @@ public class WaffentypDao implements IWaffentypDao {
         String query = "SELECT w.WaffentypID, wt.Bezeichnung AS Waffentyp, w.Bezeichnung AS WaffeName, MAX(w.DPS) AS MaxDPS " +
                 "FROM Waffe w " +
                 "JOIN Waffentyp wt ON w.WaffentypID = wt.WaffentypID " +
-                "GROUP BY w.WaffentypID " +
+                "GROUP BY w.WaffentypID, wt.Bezeichnung, w.Bezeichnung " +
                 "ORDER BY MAX(w.DPS) DESC;";
         try (Connection con = getConnection();
              Statement statement = con.createStatement();
@@ -34,7 +34,7 @@ public class WaffentypDao implements IWaffentypDao {
             while (resultSet.next()) {
                 WaffentypDto waffentypDto = new WaffentypDto();
                 waffentypDto.setWaffentypID(resultSet.getInt("waffentypID"));
-                waffentypDto.setBezeichnung(resultSet.getString("Bezeichnung"));
+                waffentypDto.setBezeichnung(resultSet.getString("Waffentyp"));
                 waffentypDto.setWaffenBezeichnung(resultSet.getString("WaffeName"));
                 waffentypDto.setWaffenDPS(resultSet.getDouble("MaxDPS"));
                 waffentypDtoList.add(waffentypDto);
