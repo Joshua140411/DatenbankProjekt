@@ -12,27 +12,29 @@ public class Menu {
     private final VolkService volkService;
     private final GebietService gebietService;
     private final WaffeService waffeService;
+    private final WaffenTypService waffenTypService;
 
     public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService,
                 NpcService npcService, VolkService volkService, GebietService gebietService,
-                WaffeService waffeService) {
+                WaffeService waffeService, WaffenTypService waffenTypService) {
         this.ruestungService = ruestungService;
         this.ruestungsTypService = ruestungsTypService;
         this.npcService = npcService;
         this.volkService = volkService;
         this.gebietService = gebietService;
         this.waffeService = waffeService;
+        this.waffenTypService = waffenTypService;
     }
 
     public void createMenu() {
         System.out.println("KONSOLENMENU");
         System.out.println("-----------------------------------");
-        System.out.println("1 - SQL ABFRAGE 1");
-        System.out.println("2 - SQL ABFRAGE 2");
-        System.out.println("3 - SQL ABFRAGE 3");
-        System.out.println("4 - SQL ABFRAGE 4");
-        System.out.println("5 - SQL ABFRAGE 5");
-        System.out.println("6 - CRUD BEISPIEL");
+        System.out.println("1 - Zeige eine Liste aller NPCs und den Namen des Volkes, dem sie angehoeren.");
+        System.out.println("2 - Zeige für jeden Waffentypen die Waffe mit dem hoechsten DPS.");
+        System.out.println("3 - Zeige alle Gebiete - sortiert nach dem Namen - die auf dem Kontinent 'Eastern Kingdom' liegen und keine Hauptstaedte sind.");
+        System.out.println("4 - Zeige alle  Voelker der Zugehoerigkeit 'Horde' und den Namen ihres Hauptsitzes.");
+        System.out.println("5 - Zeige alle Gegenstaende des Types 'Waffe' und ihre wichtigsten Attribute.");
+        System.out.println("6 - CRUD BEISPIEL RUESTUNG");
         System.out.println("7 - EXIT");
 
         manageInput(doInput());
@@ -49,7 +51,7 @@ public class Menu {
         Scanner sc2 = new Scanner(System.in);
         switch (eingabe) {
             case 1:
-                System.out.println("SQL ABFRAGE 1");
+                System.out.println("Zeige eine Liste aller NPCs und den Namen des Volkes, dem sie angehoeren.");
                 System.out.println();
                 System.out.println("Voelker: ");
                 volkService.getAllVolk().forEach(value -> System.out.println(value.toString()));
@@ -62,13 +64,15 @@ public class Menu {
                 createMenu();
                 break;
             case 2:
-                System.out.println("SQL ABFRAGE 2");
+                System.out.println("Zeige für jeden Waffentypen die Waffe mit dem hoechsten DPS.");
                 System.out.println("--------------------------------");
+                System.out.println();
+                waffenTypService.getAllWaffentypAndWaffe().forEach(value -> System.out.println(value.toString()));
                 System.out.println();
                 createMenu();
                 break;
             case 3:
-                System.out.println("SQL ABFRAGE 3");
+                System.out.println("Zeige alle Gebiete - sortiert nach dem Namen - die auf dem Kontinent 'Eastern Kingdom' liegen und keine Hauptstaedte sind.");
                 System.out.println("--------------------------------");
                 System.out.println();
                 gebietService.getAllGebietWithContinent("Eastern Kingdom").forEach(value -> System.out.println(value.gebietIdBezeichnungToString()));
@@ -76,7 +80,7 @@ public class Menu {
                 createMenu();
                 break;
             case 4:
-                System.out.println("SQL ABFRAGE 4");
+                System.out.println("Zeige alle  Voelker der Zugehoerigkeit 'Horde' und den Namen ihres Hauptsitzes.");
                 System.out.println("--------------------------------");
                 System.out.println();
                 volkService.getAllVolkByZugehoerigkeitWithHauptsitz("Horde").forEach(value -> System.out.println(value.volkWithHauptsitzbezeichnungToString()));
@@ -84,7 +88,7 @@ public class Menu {
                 createMenu();
                 break;
             case 5:
-                System.out.println("SQL ABFRAGE 5");
+                System.out.println("Zeige alle Gegenstaende des Types 'Waffe' und ihre wichtigsten Attribute.");
                 System.out.println("--------------------------------");
                 System.out.println();
                 waffeService.getAll().forEach(value -> System.out.println(value.toString()));
@@ -104,7 +108,7 @@ public class Menu {
 
     public void crudMenu() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("CRUD MENU");
+        System.out.println("CRUD MENU (Ruestung)");
         System.out.println("-----------------------------------");
         System.out.println("1 - CREATE");
         System.out.println("2 - READ");
@@ -129,12 +133,14 @@ public class Menu {
                 System.out.println();
                 System.out.println(ruestungService.getRuestungById(typID).toString());
                 System.out.println();
+                break;
             case 3:
                 System.out.println();
                 System.out.print("READ ALL");
                 System.out.println("---------------------------------");
                 ruestungService.getAllRuestung().forEach(value -> System.out.println(value.toString()));
                 System.out.println();
+                break;
             case 4:
                 System.out.println();
                 System.out.print("UPDATE");
@@ -143,6 +149,7 @@ public class Menu {
                 int updateID = sc.nextInt();
                 ruestungService.updateRuestung(createDto(sc, updateID));
                 System.out.println();
+                break;
             case 5:
                 System.out.println();
                 System.out.print("DELETE");
@@ -151,6 +158,7 @@ public class Menu {
                 int deletID = sc.nextInt();
                 ruestungService.deleteRuestungById(deletID);
                 System.out.println();
+                break;
             case 6:
                 break;
         }

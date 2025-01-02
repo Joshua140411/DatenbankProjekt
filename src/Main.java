@@ -10,7 +10,8 @@ public class Main {
                 new NpcService(new NpcDao()),
                 new VolkService(new VolkDao()),
                 new GebietService(new GebietDao()),
-                new WaffeService(new WaffeDao()));
+                new WaffeService(new WaffeDao()),
+                new WaffenTypService(new WaffentypDao()));
         menu.createMenu();
     }
 }

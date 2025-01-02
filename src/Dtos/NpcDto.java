@@ -6,12 +6,14 @@ public class NpcDto
     private String name;
     private int volk;
     private String ambitionen;
+    private String volkBezeichnug;
 
-    public NpcDto(int npcID, String name, int volk, String ambitionen) {
+    public NpcDto(int npcID, String name, int volk, String ambitionen, String volkBezeichnug) {
         this.npcID = npcID;
         this.name = name;
         this.volk = volk;
         this.ambitionen = ambitionen;
+        this.volkBezeichnug = volkBezeichnug;
     }
 
     public NpcDto() {
@@ -49,12 +51,18 @@ public class NpcDto
         this.ambitionen = ambitionen;
     }
 
+    public String getVolkBezeichnug(){return volkBezeichnug;}
+
+    public void setVolkBezeichnug(String volkBezeichnug) {
+        this.volkBezeichnug = volkBezeichnug;
+    }
+
     @Override
     public String toString() {
         return "ID: " + getNpcID() + ", Name: " + getName() + ", Volk: " + getVolk() + ", Ambitionen: " + getAmbitionen();
     }
 
     public String allNpcByVolkIdToString() {
-        return "ID: " + getNpcID() + ", Name: " + getName() + ", Ambitionen: " + getAmbitionen();
+        return "ID: " + getNpcID() + ", Name: " + getName() + ", Ambitionen: " + getAmbitionen() + ", Volk: " + getVolkBezeichnug();
     }
 }
