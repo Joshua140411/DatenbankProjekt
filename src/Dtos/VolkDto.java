@@ -2,19 +2,21 @@ package Dtos;
 
 public class VolkDto
 {
-    private int VolkID;
-    private String Name;
-    private String Zugehoerigkeit;
-    private int Hauptsitz;
-    private String Reittier;
+    private int volkID;
+    private String name;
+    private String zugehoerigkeit;
+    private int hauptsitz;
+    private String hauptsitzBezeichnung;
+    private String reittier;
     private int anfuehrer;
 
-    public VolkDto(int volkID, String name, String zugehoerigkeit, int hauptsitz, String reittier, int anfuehrer) {
-        VolkID = volkID;
-        Name = name;
-        Zugehoerigkeit = zugehoerigkeit;
-        Hauptsitz = hauptsitz;
-        Reittier = reittier;
+    public VolkDto(int volkID, String name, String zugehoerigkeit, int hauptsitz, String hauptsitzBezeichnung, String reittier, int anfuehrer) {
+        this.volkID = volkID;
+        this.name = name;
+        this.zugehoerigkeit = zugehoerigkeit;
+        this.hauptsitz = hauptsitz;
+        this.hauptsitzBezeichnung = hauptsitzBezeichnung;
+        this.reittier = reittier;
         this.anfuehrer = anfuehrer;
     }
 
@@ -22,43 +24,43 @@ public class VolkDto
     }
 
     public int getVolkID() {
-        return VolkID;
+        return volkID;
     }
 
     public void setVolkID(int volkID) {
-        VolkID = volkID;
+        this.volkID = volkID;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getZugehoerigkeit() {
-        return Zugehoerigkeit;
+        return zugehoerigkeit;
     }
 
     public void setZugehoerigkeit(String zugehoerigkeit) {
-        Zugehoerigkeit = zugehoerigkeit;
+        this.zugehoerigkeit = zugehoerigkeit;
     }
 
     public int getHauptsitz() {
-        return Hauptsitz;
+        return hauptsitz;
     }
 
     public void setHauptsitz(int hauptsitz) {
-        Hauptsitz = hauptsitz;
+        this.hauptsitz = hauptsitz;
     }
 
     public String getReittier() {
-        return Reittier;
+        return reittier;
     }
 
     public void setReittier(String reittier) {
-        Reittier = reittier;
+        this.reittier = reittier;
     }
 
     public int getAnfuehrer() {
@@ -69,8 +71,16 @@ public class VolkDto
         this.anfuehrer = anfuehrer;
     }
 
+    public String getHauptsitzBezeichnung() {return hauptsitzBezeichnung;}
+
+    public void setHauptsitzBezeichnung(String hauptsitzBezeichnung) {this.hauptsitzBezeichnung = hauptsitzBezeichnung;}
+
     @Override
     public String toString() {
         return "ID: " + getVolkID() + ", Name: " + getName();
+    }
+
+    public String volkWithHauptsitzbezeichnungToString() {
+        return "ID: " + getVolkID() + ", Name: " + getName() + ", Hauptsitz: " + getHauptsitzBezeichnung();
     }
 }

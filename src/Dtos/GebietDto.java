@@ -68,4 +68,8 @@ public class GebietDto
     public void setObergebiet(int obergebiet) {
         this.obergebiet = obergebiet;
     }
+
+    public String gebietIdBezeichnungToString() {
+        return "ID: " + getGebietID() + ", Bezeichnung: " + getBezeichnung();
+    }
 }

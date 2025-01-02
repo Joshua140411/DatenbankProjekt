@@ -79,4 +79,9 @@ public class WaffeDto {
     public void setTempo(double tempo) {
         this.tempo = tempo;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + getWaffenId() + ", Bezeichnung: " + getBezeichnung() + ", Tempo: " + getTempo() + ", DPS: " + getDps();
+    }
 }

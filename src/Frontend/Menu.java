@@ -1,25 +1,27 @@
 package Frontend;
 
-import Backend.NpcService;
-import Backend.RuestungService;
-import Backend.RuestungsTypService;
-import Backend.VolkService;
+import Backend.*;
 import Dtos.RuestungDto;
 import java.util.Scanner;
 
 public class Menu {
 
-    private RuestungService ruestungService;
-    private RuestungsTypService ruestungsTypService;
-    private NpcService npcService;
-    private VolkService volkService;
+    private final RuestungService ruestungService;
+    private final RuestungsTypService ruestungsTypService;
+    private final NpcService npcService;
+    private final VolkService volkService;
+    private final GebietService gebietService;
+    private final WaffeService waffeService;
 
     public Menu(RuestungService ruestungService, RuestungsTypService ruestungsTypService,
-                NpcService npcService, VolkService volkService) {
+                NpcService npcService, VolkService volkService, GebietService gebietService,
+                WaffeService waffeService) {
         this.ruestungService = ruestungService;
         this.ruestungsTypService = ruestungsTypService;
         this.npcService = npcService;
         this.volkService = volkService;
+        this.gebietService = gebietService;
+        this.waffeService = waffeService;
     }
 
     public void createMenu() {
@@ -61,21 +63,31 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("SQL ABFRAGE 2");
+                System.out.println("--------------------------------");
                 System.out.println();
                 createMenu();
                 break;
             case 3:
                 System.out.println("SQL ABFRAGE 3");
+                System.out.println("--------------------------------");
+                System.out.println();
+                gebietService.getAllGebietWithContinent("Eastern Kingdom").forEach(value -> System.out.println(value.gebietIdBezeichnungToString()));
                 System.out.println();
                 createMenu();
                 break;
             case 4:
                 System.out.println("SQL ABFRAGE 4");
+                System.out.println("--------------------------------");
+                System.out.println();
+                volkService.getAllVolkByZugehoerigkeitWithHauptsitz("Horde").forEach(value -> System.out.println(value.volkWithHauptsitzbezeichnungToString()));
                 System.out.println();
                 createMenu();
                 break;
             case 5:
                 System.out.println("SQL ABFRAGE 5");
+                System.out.println("--------------------------------");
+                System.out.println();
+                waffeService.getAll().forEach(value -> System.out.println(value.toString()));
                 System.out.println();
                 createMenu();
                 break;

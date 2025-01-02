@@ -16,4 +16,8 @@ public class VolkService {
     public List<VolkDto> getAllVolk() {
         return iVolkDao.readAll();
     }
+
+    public List<VolkDto> getAllVolkByZugehoerigkeitWithHauptsitz(String zugehoerigkeit) {
+        return iVolkDao.readAllByZugehoerigkeitWithHauptsitz(zugehoerigkeit);
+    }
 }

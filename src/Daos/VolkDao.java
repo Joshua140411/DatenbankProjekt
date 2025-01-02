@@ -41,7 +41,37 @@ public class VolkDao implements IVolkDao{
             }
             closeConnection(con);
         } catch (SQLException e) {
-            System.out.println("Fehler beim Laden der Ruestung (RuestungsDao/readAll): " + e.getMessage());
+            System.out.println("Fehler beim Laden des Volkes (VolkDao/readAll): " + e.getMessage());
+        }
+        return volkDtoList;
+    }
+
+    @Override
+    public List<VolkDto> readAllByZugehoerigkeitWithHauptsitz(String zugehoerigkeit) {
+        List<VolkDto> volkDtoList = new ArrayList<>();
+        String query = "SELECT v.volkId, v.name AS VolkName, g.bezeichnung AS HauptsitzBezeichnung " +
+                "FROM Volk v " +
+                "JOIN Gebiet g ON v.hauptsitz = g.gebietID " +
+                "WHERE v.zugehoerigkeit = ?";
+
+        try(Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement(query)) {
+
+            statement.setString(1, zugehoerigkeit);
+
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()) {
+                    VolkDto volkDto = new VolkDto();
+                    volkDto.setVolkID(resultSet.getInt("VolkID"));
+                    volkDto.setName(resultSet.getString("VolkName"));
+                    volkDto.setHauptsitzBezeichnung(resultSet.getString("HauptsitzBezeichnung"));
+                    volkDtoList.add(volkDto);
+                }
+            } catch (SQLException e) {
+                System.out.println("Fehler beim Laden des Volkes (VolkDao/readAllByZugehoerigkeitWithHauptsitz): " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Laden des Volkes (VolkDao/readAllByZugehoerigkeitWithHauptsitz): " + e.getMessage());
         }
         return volkDtoList;
     }
