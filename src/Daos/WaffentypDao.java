@@ -22,11 +22,22 @@ public class WaffentypDao implements IWaffentypDao {
     @Override
     public List<WaffentypDto> readAllGetMaxDPSWeapon() {
         List<WaffentypDto> waffentypDtoList = new ArrayList<>();
-        String query = "SELECT w.WaffentypID, wt.Bezeichnung AS Waffentyp, w.Bezeichnung AS WaffeName, MAX(w.DPS) AS MaxDPS " +
-                "FROM Waffe w " +
-                "JOIN Waffentyp wt ON w.WaffentypID = wt.WaffentypID " +
-                "GROUP BY w.WaffentypID, wt.Bezeichnung, w.Bezeichnung " +
-                "ORDER BY MAX(w.DPS) DESC;";
+        String query = "WITH MaxDPSPerWaffentyp AS (\n" +
+                "    SELECT w.WaffentypID, MAX(w.DPS) AS MaxDPS\n" +
+                "    FROM \n" +
+                "        Waffe w\n" +
+                "    GROUP BY \n" +
+                "        w.WaffentypID\n" +
+                ")\n" +
+                "SELECT wt.WaffentypID, wt.Bezeichnung AS Waffentyp, w.Bezeichnung AS WaffeName, m.MaxDPS\n" +
+                "FROM \n" +
+                "    MaxDPSPerWaffentyp m\n" +
+                "JOIN \n" +
+                "    Waffe w ON m.WaffentypID = w.WaffentypID AND m.MaxDPS = w.DPS\n" +
+                "JOIN \n" +
+                "    Waffentyp wt ON wt.WaffentypID = w.WaffentypID\n" +
+                "ORDER BY \n" +
+                "    m.MaxDPS DESC;";
         try (Connection con = getConnection();
              Statement statement = con.createStatement();
              ResultSet resultSet = statement.executeQuery(query)){
